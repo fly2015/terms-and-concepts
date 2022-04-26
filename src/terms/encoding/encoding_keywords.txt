@@ -1,0 +1,91 @@
+https://kunststube.net/encoding/
+- CP only can store and works with bits, any characters, numbers or symbol is stored by bits behind.
+- Human need to convert a sequence of bits into something like letters, numbers and pictures using an encoding scheme, or encoding for short.
+Example:	01100010 01101001 01110100 01110011   (A.1)
+			b        i        t        s
+			
+- The ASCII encoding specifies a table translating bytes into human readable letters.
+	-> Using 1 byte to represent a character(actually is only 7 bits)
+		Max is 256 values, using 128
+
+- ASCII table (128) 
+	95 human readable
+	+ A-Z, a-z
+	+ 0-9
+	+ punctuation marks, special characters($,&..)
+	33 not printable
+	+ line feed: means moving one line forward. The code is \n.
+	+ A carriage return means moving the cursor to the beginning of the line. The code is \r.
+	+ Backspace is a control character that moves the cursor one character back in the console but doesn't delete it. \b
+	
+	
+Important Terms
+	encode: convert into a coded form(bits form)
+	code:  a system of words, letters, figures, or other symbols substituted for other words, letters, etc.
+	
+	To encode(mã hóa) something in ASCII, follow the table(A.1) from right to left, substituting letters for bits.(thay thế các chữ bằng các bits)
+	To decode a string of bits into human readable characters, follow the table from left to right, substituting bits for letters.(thay thế bit bằng các chữ cái)
+	
+	
+	To encode means to use something to represent something else. 
+	An ENCODING is the set of rules with which(để) to convert something from one representation to another.
+	
+	* character set/charset:
+	 The set of characters that can be encoded
+		"The ASCII encoding encompasses a character set of 128 characters." 
+		-> Essentially synonymous to "encoding".
+	
+	* code page: 
+		A "page" of codes that map a character to a number or bit sequence. A.k.a. "the table".
+		-> Essentially synonymous to "encoding".
+	
+	* string
+		Sequencce of characters
+		
+Multi-Byte Encodings
+	 Using two bytes (16 bits), it's possible to encode 65,536 distinct values.	
+	 
+Unicode To The Confusion
+	UNICODE: encoding international standard to unify all encoding standards
+	It basically defines a ginormous table of 1,114,112 code points that can be used for all sorts of letters and symbols
+	 
+	How many bits does Unicode use to encode all these characters? 
+	None. Because Unicode is NOT an encoding.	
+	
+	* UTF-16 and UTF-8 are variable-length encodings
+	* If a character can be represented using a single byte (because its code point is a very small number), UTF-8 will encode it with a single byte. 
+	If it requires two bytes, it will use two bytes and so on.
+	*  UTF-16 is in the middle, using at least two bytes, growing to up to four bytes as necessary.
+	
+	
+	Unicode is a large table mapping characters to numbers and the different UTF encodings specify how these numbers are encoded as bits
+	-> Unicode.png
+	
+Code Points
+		Unicode code points are written in hexadecimal (to keep the numbers shorter)
+		preceded by a "U+" (that's just what they do, it has no other meaning than "this is a Unicode code point").
+		
+TL;DR
+	
+	- Any character can be encoded in many different bit sequences and any particular bit sequence can represent many different characters, depending on which encoding is used to read or write them.
+	-> different encodings
+
+Misconceptions, Confusions And Problems
+- The computer always needs to be told what encoding some text is in.
+- A raw bit sequence is always a mystery box and could mean anything.
+
+So How To Handle Encodings Correctly?
+	- It's really simple: Know what encoding a certain piece of text, that is, a certain byte sequence, is in, then interpret it with that encoding
+	- Convert between encoding.
+	
+Unicode All The Way
+	If your system needs to work with other encodings, convert them to Unicode upon input and convert them back to other encodings on output as necessary.
+	
+UTF-8 And ASCII
+	All characters available in the ASCII encoding only take up a single byte in UTF-8 and they're the exact same bytes as are used in ASCII.
+	ASCII maps 1:1 unto UTF-8 	
+	Any character not in ASCII takes up two or more bytes in UTF-8
+
+
+>>> MORE
+ISO-8859: a byte for each character, using full 8 bits -> 256 code points	
